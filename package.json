@@ -2,9 +2,9 @@
   "name": "todolistwithexpress",
   "version": "0.0.1",
   "description": "experimental project with typescript and express",
-  "main": "index.js",
+  "main": "public/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "sassw": "sass --watch sass/* src"
   },
   "repository": {
     "type": "git",
