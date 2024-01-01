@@ -1,11 +1,19 @@
 "use strict";
 document.addEventListener('DOMContentLoaded', () => {
+    const URI = 'http://localhost:3000';
+    const todo = document.querySelector('#todo');
     const create = document.querySelector('#create');
-    create.addEventListener('click', (ev) => {
-        alert('button clicked');
-    });
     const del = document.querySelector('#delete');
-    del.addEventListener('click', (ev) => {
+    create.addEventListener('click', () => {
+        fetch(URI, {
+            method: 'POST',
+            body: JSON.stringify(todo.value)
+        }).then(res => {
+            if (res.status === 200)
+                alert('new todo added!');
+        }).catch(err => console.warn(`Error: ${err.message}!`));
+    });
+    del.addEventListener('click', () => {
         alert('delete button clicked');
     });
 });
