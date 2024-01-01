@@ -1,3 +1,35 @@
+:root {
+  font-family: Verdana;
+  font-size: 12px;
+  font-box-sizing: border-box;
+}
 
+div#main {
+  width: 600px;
+  margin: auto;
+  background-color: hsl(0, 0%, 21%);
+}
+div#main h2 {
+  padding: 30px;
+  color: hsl(0, 0%, 96%);
+  text-align: center;
+}
+
+div#body input {
+  margin: 30px 44px;
+  padding: 6px;
+  width: 50%;
+}
+div#body button {
+  margin: 30px 10px;
+  padding: 6px;
+  color: hsl(0, 0%, 96%);
+}
+div#body #create {
+  background-color: hsl(141, 71%, 48%);
+}
+div#body #delete {
+  background-color: hsl(348, 100%, 61%);
+}
 
 /*# sourceMappingURL=styles.css.map */
