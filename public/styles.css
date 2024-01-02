@@ -28,7 +28,16 @@ div#body button {
 div#body #create {
   background-color: hsl(141, 71%, 48%);
 }
-div#body #delete {
+
+ul {
+  list-style-type: none;
+}
+ul li {
+  display: block;
+  color: hsl(0, 0%, 96%);
+}
+ul button.delete {
+  display: inline-block;
   background-color: hsl(348, 100%, 61%);
 }
 

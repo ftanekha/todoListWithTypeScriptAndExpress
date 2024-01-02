@@ -12,10 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (res.status === 200)
                 return alert('new todo added!');
             alert(`Error: ${res.statusText}!`);
-        }).catch(err => console.warn(`Error: ${err.message}!`));
-    });
-    del.addEventListener('click', () => {
-        alert('delete button clicked');
+        }).catch(err => alert(`Error: ${err.message}!`));
     });
     //display current list of todos
     fetch(URI)
@@ -26,7 +23,26 @@ document.addEventListener('DOMContentLoaded', () => {
         todos.forEach((todo) => {
             const li = document.createElement('li');
             li.className += 'todo';
-            li.innerText = todo.name;
+            //add delete button
+            const btn = document.createElement('button');
+            btn.innerText = 'delete';
+            btn.className += 'delete';
+            li.append(btn);
+            //append todo text
+            const textNode = document.createTextNode(todo.name);
+            textNode.className += 'textnode';
+            //implement todo delete functionality
+            btn.addEventListener('click', () => {
+                fetch(URI, {
+                    method: 'DELETE',
+                    body: JSON.stringify(todo.id)
+                }).then(res => {
+                    if (res.status === 200)
+                        return alert('Todo deleted!');
+                    alert(`Error: ${res.statusText}!`);
+                }).catch(err => alert(`Error: ${err.message}!`));
+            });
+            li.append(textNode);
             ul.append(li);
         });
         display.append(ul);

@@ -46,8 +46,16 @@ div#body{
     #create{
         background-color: hsl(141, 71%, 48%);
     }
-    #delete{
+}
+
+ul{
+    list-style-type: none;
+    li{
+        display: block;
+        color: $rootcolor;
+    }
+    button.delete{
+        display: inline-block;
         background-color: hsl(348, 100%, 61%);
     }
-
 }

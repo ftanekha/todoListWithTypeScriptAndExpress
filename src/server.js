@@ -8,6 +8,14 @@ const port = process.env.PORT
 const db = './todos.json'
 //local DB file
 let todos = require(db)
+//function for updating DB
+function updateTodos(filename){
+    writeFile(filename, JSON.stringify(todos))
+    .then(()=> {
+        console.info('Todos updated')
+    })
+    .catch(err => console.warn(`Error writing to file: ${err.message}!`))
+}
 
 app
 .use(cors())
@@ -29,16 +37,10 @@ app
         //req.body produces extra quotes on string e.g. ""some text""
         //remove unwanted quotes
         todo = todo.substring(1, todo.length - 1)
-        console.log(todo, todo[0])
-        //function for updating DB
-        function updateTodos(filename){
-            writeFile(filename, JSON.stringify(todos))
-            .then(()=> {
-                console.info('Todos updated')
-                res.status(200).send('New todo added!')
-            })
-            .catch(err => console.warn(`Error writing to file: ${err.message}!`))
-        }
+        //capitalise todo
+        todo = Array.from(todo)
+        todo[0] = todo[0].toUpperCase()
+        todo = todo.join('')
         //add todo to DB file
         //if todos already populated
         if(todos.length >= 1){
@@ -59,18 +61,30 @@ app
             if(names.includes(todo)) res.status(409).json('Todo already exists!')
             //update DB
             todos.push({id: genRandNum(), name: todo})
-            updateTodos(process.env.PWD + '/src/todos.json')
+            updateTodos(process.env.PWD + '/src/todos.json') && res.status(200).send('New todo added!')
         }else{
             //check todos.length !lt 0
             if(todos.length === 0){
                 const rand = Math.ceil(Math.random() * 10)
                 todos.push({id: rand, name: todo})
-                updateTodos(process.env.PWD + '/src/todos.json')
+                updateTodos(process.env.PWD + '/src/todos.json') && res.status(200).send('New todo added!')
             }
         }
-        console.log('./src/todos.json')
     }
 )
+
+.delete(
+    '/',
+    (req, res)=>{
+        const id = Number(req.body)
+        //delete todo
+        todos = todos.filter(
+            todo => todo.id !== id
+        )
+        updateTodos(process.env.PWD + '/src/todos.json') && res.status(200).send('Todo deleted!')
+    }
+)
+
 .listen(
     port,
     'localhost',
