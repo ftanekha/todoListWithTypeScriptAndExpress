@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
         fetch(URI, {
             method: 'POST',
             body: JSON.stringify(todo.value)
-        }).then(res => {
+        }).then((res) => {
             if (res.status === 200)
                 return alert('new todo added!');
             alert(`Error: ${res.statusText}!`);
