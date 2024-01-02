@@ -17,4 +17,18 @@ document.addEventListener('DOMContentLoaded', () => {
     del.addEventListener('click', () => {
         alert('delete button clicked');
     });
+    //display current list of todos
+    fetch(URI)
+        .then(res => res.json())
+        .then((todos) => {
+        const display = document.querySelector('#display');
+        const ul = document.createElement('ul');
+        todos.forEach((todo) => {
+            const li = document.createElement('li');
+            li.className += 'todo';
+            li.innerText = todo.name;
+            ul.append(li);
+        });
+        display.append(ul);
+    });
 });

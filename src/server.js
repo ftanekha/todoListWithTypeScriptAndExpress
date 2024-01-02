@@ -15,6 +15,13 @@ app
 .use(bodyParser.urlencoded({extended : true}))
 .use(bodyParser.text())
 
+.get(
+    '/',
+    (req, res)=>{
+        res.status(200).json(todos)
+    }
+)
+
 .post(
     '/',
     (req, res)=> {
@@ -51,7 +58,7 @@ app
             //check todo doesn't already exist
             if(names.includes(todo)) res.status(409).json('Todo already exists!')
             //update DB
-            todos.push({id: genRandNum(), todo})
+            todos.push({id: genRandNum(), name: todo})
             updateTodos(process.env.PWD + '/src/todos.json')
         }else{
             //check todos.length !lt 0
