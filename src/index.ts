@@ -5,7 +5,6 @@ document.addEventListener(
 
         const todo: HTMLInputElement = document.querySelector('#todo')!       
         const create: HTMLButtonElement = document.querySelector('#create')!
-        const del: HTMLButtonElement = document.querySelector('#delete')!
 
         create.addEventListener(
             'click',
@@ -17,9 +16,10 @@ document.addEventListener(
                         body: JSON.stringify(todo.value)
                     }
                 ).then(
-                    res => {
-                        if(res.status === 200) return alert('new todo added!')
-                        alert(`Error: ${res.statusText}!`)
+                    (res) => {
+                        alert(res.status)
+                        // if(res.status === 200) return alert('new todo added!')
+                        // alert(`Error: ${res.statusText}!`)
                     }
                 ).catch(err => alert(`Error: ${err.message}!`))
             }

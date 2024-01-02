@@ -58,16 +58,18 @@ app
                 return rand
             }
             //check todo doesn't already exist
-            if(names.includes(todo)) res.status(409).json('Todo already exists!')
+            if(names.includes(todo)) return res.status(409).json('Todo already exists!')
             //update DB
             todos.push({id: genRandNum(), name: todo})
-            updateTodos(process.env.PWD + '/src/todos.json') && res.status(200).send('New todo added!')
+            updateTodos(process.env.PWD + '/src/todos.json') 
+            return res.status(200).send('New todo added!')
         }else{
             //check todos.length !lt 0
             if(todos.length === 0){
                 const rand = Math.ceil(Math.random() * 10)
                 todos.push({id: rand, name: todo})
-                updateTodos(process.env.PWD + '/src/todos.json') && res.status(200).send('New todo added!')
+                updateTodos(process.env.PWD + '/src/todos.json')
+                return res.status(200).send('New todo added!')
             }
         }
     }
@@ -81,7 +83,8 @@ app
         todos = todos.filter(
             todo => todo.id !== id
         )
-        updateTodos(process.env.PWD + '/src/todos.json') && res.status(200).send('Todo deleted!')
+        updateTodos(process.env.PWD + '/src/todos.json')
+        return res.status(200).send('Todo deleted!')
     }
 )
 
