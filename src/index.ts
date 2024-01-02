@@ -18,7 +18,8 @@ document.addEventListener(
                     }
                 ).then(
                     res => {
-                        if(res.status === 200) alert('new todo added!')
+                        if(res.status === 200) return alert('new todo added!')
+                        alert(`Error: ${res.statusText}!`)
                     }
                 ).catch(err => console.warn(`Error: ${err.message}!`))
             }

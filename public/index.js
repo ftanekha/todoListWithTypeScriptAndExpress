@@ -10,7 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
             body: JSON.stringify(todo.value)
         }).then(res => {
             if (res.status === 200)
-                alert('new todo added!');
+                return alert('new todo added!');
+            alert(`Error: ${res.statusText}!`);
         }).catch(err => console.warn(`Error: ${err.message}!`));
     });
     del.addEventListener('click', () => {
